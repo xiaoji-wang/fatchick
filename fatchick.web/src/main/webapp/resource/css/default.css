@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: #fefefe;
+	font: 17px 微软雅黑;
+	margin: 0px;
+	color: #666666;
+}
+
+input::-ms-clear {
+	display: none;
+} /*隐藏文本框叉子*/
+
+input::-ms-reveal {
+	display: none;
+} /*隐藏密码框小眼睛*/
+
+input{
+	vertical-align:middle;
+	color: #666666;
+}
+
+input[type="text"], input[type="password"] {
+	vertical-align:middle;
+	padding: 10px;
+	border: 1px solid #ccc;
+	color: #bbb;
+	background: #fafafa;
+	border-radius: 3px;
+	font: bold 14px Arial, Helvetica;
+	margin: 0;
+	line-height: normal;
+}
+
+input[type=text]:focus, input[type="password"]:focus {
+	outline: 0;
+	color: #444;
+}
+
+input[type="button"], input[type="submit"], input[type="reset"] {
+	vertical-align:middle;
+	padding: 5px 10px;
+	width: 100px;
+	border: 1px solid #ccc;
+	font: 15px 微软雅黑;
+	background-color: #fefefe;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover{
+	background-color: #f0f0f0;
+}
+
+.icp a{
+	color: black;
+	text-decoration: none;
+	border: none;
+}
+
+.icp a:hover {
+	color: black;
+	text-decoration: none;
+}
