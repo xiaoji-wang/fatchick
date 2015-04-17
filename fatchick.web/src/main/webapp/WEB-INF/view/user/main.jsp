@@ -15,14 +15,17 @@
 	<div class="content">
 		<div style="width: 800px;padding: 3px 8px;">
 			<c:forEach items="${pages}" var="item">
-				<div style="padding: 8px 3px; border-bottom: dashed 1px #a0a0a0;" onmouseover="onMouseOver(this)" onmouseout="onMouseOut(this)">
+				<div id="page_${item.id}" style="padding: 8px 3px; border-bottom: dashed 1px #a0a0a0;" onmouseover="onMouseOver(this)" onmouseout="onMouseOut(this)">
 					<a href="${item}" target="_blank">${item.title}</a>
 					<button class="button-xsmall pure-button" style="float: right;display: none;">
 						<i class="fa fa-cog fa-lg"></i>
 					</button>
+					<button class="button-xsmall pure-button" style="float: right;display: none;" onclick="removeWebsite(${item.id});">
+						<i class="fa fa-minus fa-lg"></i>
+					</button>
 				</div>
 			</c:forEach>
-			<div style="padding: 5px; border-bottom: dashed 1px #a0a0a0;">
+			<div class="website" style="padding: 5px; border-bottom: dashed 1px #a0a0a0;">
 				<input id="website" type="text" style="width: 750px; border: none;" placeholder="http://" />
 				<button class="button-xsmall pure-button" style="float: right;" onclick="addWebsite();">
 					<i class="fa fa-plus fa-lg"></i>
