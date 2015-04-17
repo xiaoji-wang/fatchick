@@ -8,10 +8,11 @@
 	String path = request.getContextPath();
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="<%=path%>/css/head.css" rel="stylesheet" type="text/css" />
-<link href="<%=path%>/css/default.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<%=path%>/css/pure-release-0.6.0/pure-min.css"/>
+<link rel="stylesheet" href="<%=path%>/css/font-awesome-4.3.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="<%=path%>/css/fatchick.css" />
 <script type="text/javascript" src="<%=path%>/js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="<%=path%>/js/head.js"></script>
+<script type="text/javascript" src="<%=path%>/js/fatchick.js"></script>
 <script type="text/javascript">
 	var path='<%=path%>';
 </script>
@@ -26,15 +27,15 @@
 						<img class="head_image" src="<%=path%>/picture?path=${user.id}&name=head.png">	
 					</a>
 				</li>
-				<li style="margin-left: 5px;">
+				<!-- <li style="margin-left: 5px;">
 					<form class="search" action="http://www.baidu.com/baidu" target="_blank">
 						<input name="tn" type="hidden" value="baidu" />
 						<input style="width: 400px;" type="text" name="word" placeholder="百度一下" />
-						<a href="javascript:find()" style="position: relative; top: 11px; left: -41px;">
+						<a href="javascript:find()" style="position: relative; top: 11px; left: -41px;border: none;">
 							<img src="<%=path%>/images/search.png"/>
 						</a>	
 					</form>
-				</li>
+				</li> -->
 				<li class="item" onmouseover="selectItem(this);" onmouseout="initItemSelect();">
 					<a href="javascript:logout()">退出</a>
 					<form class="logout" action="<%=path%>/user/logout.data"></form>
