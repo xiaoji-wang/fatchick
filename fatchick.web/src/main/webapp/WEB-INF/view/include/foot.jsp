@@ -3,7 +3,7 @@
 <html>
 <head></head>
 <body>
-	<div style="position: absolute;bottom: 0px;width: 100%; text-align: center; font-size: 15px;">
+	<div style="position: absolute;bottom: 0px;width: 100%; height:40px; text-align:center;padding:10px;">
 		<a target="_blank" href="http://www.miitbeian.gov.cn/">滇ICP备15001190号</a>
 	</div>
 </body>

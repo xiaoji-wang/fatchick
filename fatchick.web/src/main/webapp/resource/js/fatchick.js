@@ -8,11 +8,6 @@ var Message = {
 
     Error: function(text, title) {
         alert("Error:" + text);
-    },
-
-    Prompt: function() {
-        var html = '<div style="z-index:999;background-color:#000000;opacity:0.2;width:100%;height:100%;position:absolute;top:0;"></div>';
-        $('body').append(html);
     }
 }
 
@@ -23,7 +18,7 @@ function find() {
 }
 
 function logout() {
-    $(".menu").find("form[class='logout']").eq(0).submit();
+    $(".navbar").find("form[class='logout']").eq(0).submit();
 }
 
 function selectItem(me) {
@@ -47,13 +42,11 @@ function initItemSelect() {
 }
 
 function onMouseOver(me) {
-    $(me).find('button').show();
-    $(me).addClass('div-odd');
+    $(me).find('.setting_button').show();
 }
 
 function onMouseOut(me) {
-    $(me).find('button').hide();
-    $(me).removeClass('div-odd');
+    $(me).find('.setting_button').hide();
 }
 
 function removeWebsite(id) {
@@ -86,5 +79,5 @@ function addWebsite() {
 }
 
 $(function() {
-    initItemSelect();
+    //initItemSelect();
 });
