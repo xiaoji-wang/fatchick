@@ -11,67 +11,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${user.nickName}&nbsp;-&nbsp;主页</title>
 </head>
-<body style="height: 100%; padding-top: 50px;padding-bottom: 40px;">
+<body style="height: 100%; padding-top: 50px; padding-bottom: 40px;">
 	<c:import url="/head.page"></c:import>
-	<div style="height: 100%;width: 100%;">
-		<div style="width: 20%; height: 100%; border: 1px solid #ddd;float: left;"></div>
-		<div style="border: 1px solid #ddd;  width: 80%;height: 100%;float: left;overflow-x: auto;">
-			<table class="table table-hover" style="margin: 0px;">
-				<tr style="background-color: #d0d0d0;">
-					<th colspan="2">网址书签</th>
-				</tr>
-				<c:forEach items="${pages}" var="item">
-					<tr onmouseover="onMouseOver(this);" onmouseout="onMouseOut(this);" id="${item.id}">
-						<td><a href="${item}" target="_blank">${item.title}</a></td>
-						<td style="width: 40px;"><a href="javascript:$('#page_dialog').modal('show')" class="setting_button" style="display: none;"> <span class="glyphicon glyphicon-cog" aria-hidden="true" style="width: 100%; height: 100%;"></span>
-						</a></td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-	</div>
-	<!-- <div class="content">
-		<table class="ui table">
-			<thead>
-				<tr>
-					<th colspan="2">网址收藏</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${pages}" var="item">
-					<tr>
-						<td><a href="${item}" target="_blank">${item.title}</a></td>
-						<td style="text-align: center;">${item.id}</td>
-					</tr>
-				</c:forEach>
-				<tr>
-					<td colspan="2"><div class="ui right labeled input">
-							<input type="text" placeholder="Placeholder..." /> <a class="ui label"> Label </a>
-						</div></td>
-				</tr>
-			</tbody>
-		</table>
-	
- <div style="width: 800px;padding: 3px 8px;">
-			<c:forEach items="${pages}" var="item">
-				<div id="page_${item.id}" style="padding: 8px 3px; border-bottom: dashed 1px #a0a0a0;" onmouseover="onMouseOver(this)" onmouseout="onMouseOut(this)">
-					<a href="${item}" target="_blank">${item.title}</a>
-					<button class="button-xsmall pure-button" style="float: right;display: none;">
-						<i class="fa fa-cog fa-lg"></i>
+	<div style="height: 100%; width: 100%;">
+		<div style="width: 20%; height: 100%; border: 1px solid #ddd; float: left;"></div>
+		<div style="border: 1px solid #ddd; width: 80%; height: 100%; float: left;padding-bottom: 34px;">
+			<div class="input-group">
+				<span class="input-group-addon" id="sizing-addon1">网址书签</span> <input id="website" class="form-control" type="text" placeholder="http://" />
+				<div class="input-group-btn">
+					<button class="btn btn-default" type="button" onclick="addWebsite();">添加</button>
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						<span>分类</span> <span class="caret"></span>
 					</button>
-					<button class="button-xsmall pure-button" style="float: right;display: none;" onclick="removeWebsite(${item.id});">
-						<i class="fa fa-minus fa-lg"></i>
-					</button>
+					<ul class="dropdown-menu" style="min-width: 0px;">
+						<li><a href="javascript:categateDropdown(0);">全部分类</a></li>
+						<li><a href="javascript:categateDropdown(1);">1</a></li>
+					</ul>
 				</div>
-			</c:forEach>
-			<div class="website" style="padding: 5px; border-bottom: dashed 1px #a0a0a0;">
-				<input id="website" type="text" style="width: 750px; border: none;" placeholder="http://" />
-				<button class="button-xsmall pure-button" style="float: right;" onclick="addWebsite();">
-					<i class="fa fa-plus fa-lg"></i>
-				</button>
+			</div>
+			<div style="overflow-x: auto; height: 100%;">
+				<table class="table table-hover table-striped" style="margin: 0px;">
+					<c:forEach items="${pages}" var="item" varStatus="status">
+						<tr onmouseover="onMouseOver(this);" onmouseout="onMouseOut(this);" id="${item.id}">
+							<td style="width: 15px;border-right: 1px solid #ddd;">${status.index+1}</td>
+							<td><a href="${item}" target="_blank">${item.title}</a></td>
+							<td style="width: 40px;"><a style="display: none;" class="setting_button" href="javascript:void(0);" data-toggle="modal" data-target="#page_dialog" data-page_id="${item.id}"> <span class="glyphicon glyphicon-cog" aria-hidden="true" style="width: 100%; height: 100%;"></span>
+							</a></td>
+						</tr>
+					</c:forEach>
+				</table>
 			</div>
 		</div>
-	</div> -->
+	</div>
 	<c:import url="/foot.page"></c:import>
 	<!-- dialog -->
 	<div id="page_dialog" class="modal fade">
@@ -82,7 +53,7 @@
 						<input name="title" class="form-control" type="text" required />
 					</div>
 					<div class="form-group">
-						<input name="password" class="form-control" type="password" placeholder="密码" required data-minlength="1" />
+						<div name="url" class="form-control" contentEditable="true" style="height: 180px; overflow-x: auto;" disabled></div>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -92,5 +63,17 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(function() {
+			$('#page_dialog').on('show.bs.modal', function(e) {
+				var a = $(e.relatedTarget);
+				var pageId = a.data('page_id');
+				var title = $("#" + pageId).find("a").eq(0).text();
+				var url = $("#" + pageId).find("a").eq(0).attr('href');
+				$(this).find(".form-control[name='title']").val(title);
+				$(this).find(".form-control[name='url']").text(url);
+			})
+		});
+	</script>
 </body>
 </html>

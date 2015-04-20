@@ -1,16 +1,3 @@
-/**
- * 
- */
-var Message = {
-    Info: function(text, title) {
-        alert("Info:" + text);
-    },
-
-    Error: function(text, title) {
-        alert("Error:" + text);
-    }
-}
-
 function find() {
     var form = $("form[class='search']").eq(0);
     form.submit();
@@ -21,36 +8,12 @@ function logout() {
     $(".navbar").find("form[class='logout']").eq(0).submit();
 }
 
-function selectItem(me) {
-    $(".item").each(function(i, v) {
-        $(v).removeClass('current');
-    });
-    if (me) {
-        $(me).addClass('current');
-    }
-}
-
-function initItemSelect() {
-    $(".item").each(function(i, v) {
-        var href = $(v).find('a').attr("href");
-        if (location.href.indexOf(location.host + href) >= 0) {
-            $(v).addClass('current');
-        } else {
-            $(v).removeClass('current');
-        }
-    });
-}
-
 function onMouseOver(me) {
     $(me).find('.setting_button').show();
 }
 
 function onMouseOut(me) {
     $(me).find('.setting_button').hide();
-}
-
-function removeWebsite(id) {
-    Message.Prompt(id);
 }
 
 function addWebsite() {
@@ -61,13 +24,13 @@ function addWebsite() {
         },
         function(res) {
             if (res.success) {
-                var html = '<div style="padding: 8px 3px; border-bottom: dashed 1px #a0a0a0;" onmouseover="onMouseOver(this)" onmouseout="onMouseOut(this)">';
-                html += '<a href="' + res.data.url + '" target="_blank">' + res.data.title + '</a>';
-                html += '<button class="button-xsmall pure-button" style="float: right;display: none;">';
-                html += '<i class="fa fa-cog fa-lg"></i>';
-                html += '</button>';
-                html += '</div>';
-                $(".website").before($(html));
+                var html = '<tr onmouseover="onMouseOver(this);" onmouseout="onMouseOut(this);" id="'+res.data.id+'">';
+                html += '<td><a href="' + res.data.url + '" target="_blank">' + res.data.title + '</a></td>';
+                html += '<td style="width: 40px;">';
+                html += '<a href="javascript:$("#page_dialog").modal("show")" class="setting_button" style="display: none;">';
+                html += '<span class="glyphicon glyphicon-cog" aria-hidden="true" style="width: 100%; height: 100%;"></span>';
+                html += '</a></td></tr>';
+                $(".table").append($(html));
             } else {
                 Message.Error(res.message);
             }
@@ -78,6 +41,7 @@ function addWebsite() {
     }
 }
 
-$(function() {
-    //initItemSelect();
-});
+function categateDropdown(index){
+	var text=$('.dropdown-menu').find('li').eq(index).find('a').eq(0).text();
+	$('.dropdown-toggle[data-toggle="dropdown"]').find('span').eq(0).text(text);
+}
