@@ -94,14 +94,6 @@ public class WebPageServiceImpl implements WebPageService {
 		if (!"http".equals(url.getProtocol()) && !"https".equals(url.getProtocol())) {
 			throw new GeneralException("不支持" + url.getProtocol() + "协议！");
 		}
-		WebPage page = createWebPage(url);
-		// page.setParentWebPage(getParentWebPage(url));
-		page.setUrlMd5(md5(hyperlink));
-		webPageDao.save(page);
-		return page;
-	}
-
-	private WebPage createWebPage(URL url) throws Exception {
 		WebPage page = new WebPage();
 		page.setProtocol(url.getProtocol());
 		page.setHost(url.getHost());
@@ -109,6 +101,10 @@ public class WebPageServiceImpl implements WebPageService {
 		page.setPath(url.getPath());
 		page.setQuery(url.getQuery());
 		page.setTitle(getTitle(url));
+		// page.setParentWebPage(getParentWebPage(url));
+		page.setUrlMd5(md5(hyperlink));
+		webPageDao.save(page);
+		
 		return page;
 	}
 
@@ -146,7 +142,7 @@ public class WebPageServiceImpl implements WebPageService {
 				if (index >= 0) {
 					charset = charset.substring(index + 8);
 				} else {
-					charset = "gb2312";
+					charset = null;
 				}
 				try {
 					Document doc = Jsoup.parse(instream, charset, url.toString());

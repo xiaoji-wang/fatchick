@@ -32,6 +32,6 @@ public class WebPageTest {
 
 		WebPageService webPageService = (WebPageService) context.getBean("webPageService");
 
-		webPageService.doCreate(user, "http://baidu.com/");
+		webPageService.doCreate(user, "http://bbs.csdn.net/topics/320043313");
 	}
 }

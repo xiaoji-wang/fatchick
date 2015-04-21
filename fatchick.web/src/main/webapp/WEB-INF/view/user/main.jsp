@@ -30,13 +30,21 @@
 				</div>
 			</div>
 			<div style="overflow-x: auto; height: 100%;">
-				<table class="table table-hover table-striped" style="margin: 0px;">
+				<table class="table table-hover table-striped" style="margin: 0px;">				
 					<c:forEach items="${pages}" var="item" varStatus="status">
 						<tr onmouseover="onMouseOver(this);" onmouseout="onMouseOut(this);" id="${item.id}">
 							<td style="width: 15px;border-right: 1px solid #ddd;">${status.index+1}</td>
-							<td><a href="${item}" target="_blank">${item.title}</a></td>
-							<td style="width: 40px;"><a style="display: none;" class="setting_button" href="javascript:void(0);" data-toggle="modal" data-target="#page_dialog" data-page_id="${item.id}"> <span class="glyphicon glyphicon-cog" aria-hidden="true" style="width: 100%; height: 100%;"></span>
-							</a></td>
+							<td>
+								<a href="${item}" target="_blank">
+									<img src="<%=path%>/images/icon.png" style="width: 16px;height: 16px;"/>
+									<span style="vertical-align:middle;">${item.title}</span>
+								</a>
+							</td>
+							<td style="width: 40px;">
+								<a style="display: none;" class="setting_button" href="javascript:void(0);" data-toggle="modal" data-target="#page_dialog" data-page_id="${item.id}"> 
+									<span class="glyphicon glyphicon-cog" aria-hidden="true" style="width: 100%; height: 100%;"></span>
+								</a>
+							</td>
 						</tr>
 					</c:forEach>
 				</table>

@@ -32,7 +32,8 @@ public class WebsiteController {
 		map.put("success", true);
 		try {
 			WebPage webPage = webPageService.doCreate((User) session.getAttribute(ConstantValue.USER), url);
-			Map<String, String> data = new HashMap<String, String>();
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("id", webPage.getId());
 			data.put("url", webPage.toString());
 			data.put("title", webPage.getTitle());
 			map.put("data", data);
