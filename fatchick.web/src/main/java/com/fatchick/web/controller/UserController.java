@@ -33,20 +33,20 @@ public class UserController {
 	public ModelAndView mainPage(HttpSession session, ModelAndView mv) {
 		User user = (User) session.getAttribute(ConstantValue.USER);
 		mv.addObject("pages", webPageService.getWebPage(user));
-		mv.setViewName("/user/main");
+		mv.setViewName("user/main");
 		return mv;
 	}
 
 	@Permission(value = PermissionType.LOGIN, returnValue = "/user/login.page")
 	@RequestMapping("/setting.page")
 	public String settingPage() {
-		return "/user/setting";
+		return "user/setting";
 	}
 
 	@Permission(value = PermissionType.LOGOUT, returnValue = "/user/main.page")
 	@RequestMapping("/register.page")
 	public String registerPage() {
-		return "/user/register";
+		return "user/register";
 	}
 
 	@Permission(value = PermissionType.LOGOUT, returnValue = "/user/main.page")
@@ -60,7 +60,7 @@ public class UserController {
 			mv.setViewName("redirect:/user/main.page");
 		} catch (GeneralException e) {
 			mv.addObject("error", e.getMessage());
-			mv.setViewName("/user/register");
+			mv.setViewName("user/register");
 		}
 		return mv;
 	}
@@ -68,7 +68,7 @@ public class UserController {
 	@Permission(value = PermissionType.LOGOUT, returnValue = "/user/main.page")
 	@RequestMapping("/login.page")
 	public String loginPage() {
-		return "/user/login";
+		return "user/login";
 	}
 
 	@Permission(value = PermissionType.LOGOUT, returnValue = "/user/main.page")
@@ -81,7 +81,7 @@ public class UserController {
 		User user = userService.get(params);
 		if (null == user) {
 			mv.addObject("error", "账号或密码错误。");
-			mv.setViewName("/user/login");
+			mv.setViewName("user/login");
 		} else {
 			session.setAttribute(ConstantValue.USER, user);
 			mv.setViewName("redirect:/user/main.page");
@@ -93,7 +93,7 @@ public class UserController {
 	@RequestMapping("/logout.data")
 	public String logoutData(HttpSession session) {
 		session.setAttribute(ConstantValue.USER, null);
-		return "/user/login";
+		return "index";
 	}
 
 }

@@ -3,16 +3,28 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html style="height:100%">
+<html>
 <head>
 <%
 	String path = request.getContextPath();
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Bootstrap Core CSS -->
+<link href="<%=path%>/css/bootstrap.min.css" rel="stylesheet">
+<link href="<%=path%>/css/simple-sidebar.css" rel="stylesheet" />
+
+<!-- jQuery -->
+<script src="<%=path%>/js/jquery-2.1.3.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="<%=path%>/js/bootstrap.min.js"></script>
+
+
 <title>${user.nickName}&nbsp;-&nbsp;主页</title>
 </head>
-<body style="height: 100%; padding-top: 50px; padding-bottom: 40px;">
-	<c:import url="/head.page"></c:import>
+<body>
+	<!--<c:import url="/head.page"></c:import>
 	<div style="height: 100%; width: 100%;">
 		<div style="width: 20%; height: 100%; border: 1px solid #ddd; float: left;"></div>
 		<div style="border: 1px solid #ddd; width: 80%; height: 100%; float: left;padding-bottom: 34px;">
@@ -51,9 +63,9 @@
 			</div>
 		</div>
 	</div>
-	<c:import url="/foot.page"></c:import>
+	<c:import url="/foot.page"></c:import>-->
 	<!-- dialog -->
-	<div id="page_dialog" class="modal fade">
+	<!-- 	<div id="page_dialog" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
@@ -70,17 +82,67 @@
 				</div>
 			</div>
 		</div>
+	</div>-->
+
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><a href="#" style="padding-top: 8px;"> <img style="width: 48px; height: 48px; border-radius: 24px;" src="<%=path%>/picture?path=${user.id}&name=head.png" /> <span>wxjivm@163.com</span>
+				</a></li>
+				<li><a href="<%=path%>">首页</a></li>
+				<li><a href="#">记事本</a></li>
+				<li><a href="#">网址</a></li>
+				<li><a href="#">Events</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="<%=path%>/user/logout.data">退出</a></li>
+			</ul>
+		</div>
+		<!-- /#sidebar-wrapper -->
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1>Simple Sidebar</h1>
+						<p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+						<p>
+							Make sure to keep all page content within the
+							<code>#page-content-wrapper</code>
+							.
+						</p>
+						<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /#page-content-wrapper -->
+
 	</div>
+	<!-- /#wrapper -->
+
+
+
+	<!-- Menu Toggle Script -->
+
+
 	<script type="text/javascript">
 		$(function() {
-			$('#page_dialog').on('show.bs.modal', function(e) {
+			$("#menu-toggle").click(function(e) {
+				e.preventDefault();
+				$("#wrapper").toggleClass("toggled");
+			});
+			/*$('#page_dialog').on('show.bs.modal', function(e) {
 				var a = $(e.relatedTarget);
 				var pageId = a.data('page_id');
 				var title = $("#" + pageId).find("a").eq(0).text();
 				var url = $("#" + pageId).find("a").eq(0).attr('href');
 				$(this).find(".form-control[name='title']").val(title);
 				$(this).find(".form-control[name='url']").text(url);
-			})
+			})*/
 		});
 	</script>
 </body>

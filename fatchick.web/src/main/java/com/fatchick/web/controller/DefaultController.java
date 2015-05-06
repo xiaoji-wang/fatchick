@@ -21,17 +21,17 @@ import com.fatchick.common.util.FatChickUtil;
 public class DefaultController {
 	@RequestMapping("/index")
 	public String index(){
-		return "redirect:/user/main.page";
+		return "index";
 	}
 	
 	@RequestMapping("/head.page")
 	public String head() {
-		return "/include/head";
+		return "include/head";
 	}
 
 	@RequestMapping("/foot.page")
 	public String foot() {
-		return "/include/foot";
+		return "include/foot";
 	}
 	
 	@RequestMapping("/picture")
